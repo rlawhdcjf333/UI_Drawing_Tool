@@ -7,6 +7,7 @@ class Buttons;
 class MainGame
 {
 	Image* mBackBuffer;	//후면버퍼(건들지마라)
+	Image* mImage;
 	RECTS* mRects;
 	Buttons* mButtons;
 

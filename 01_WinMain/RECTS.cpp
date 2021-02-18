@@ -26,7 +26,13 @@ void RECTS::Update()
 
 			mRectList.push_back(rc);
 
+			if (rc.left == rc.right or rc.top == rc.bottom) {
+
+				mRectList.pop_back();
+			}
+
 			rc = {};
+
 		}
 	}
 }

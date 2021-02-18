@@ -16,6 +16,10 @@ void MainGame::Init()
 	mBackBuffer = new Image();
 	mBackBuffer->CreateEmpty(WINSIZEX, WINSIZEY);
 	
+	IMAGEMANAGER->LoadFromFile(L"Image", Resources(L"Image.bmp"), 600, 800, false);
+	mImage = IMAGEMANAGER->FindImage(L"Image");
+
+
 	mRects = new RECTS;
 	mRects->Init();
 
@@ -67,6 +71,8 @@ void MainGame::Render(HDC hdc)
 		SelectObject(backDC, oldb);
 		DeleteObject(newb);
 
+		if(mButtons->GetLoadQ())
+		mImage->ScaleRender(backDC, 0, 0, WINSIZEX, WINSIZEY);
 
 
 		mButtons->Render(backDC);

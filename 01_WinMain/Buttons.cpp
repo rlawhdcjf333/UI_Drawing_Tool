@@ -19,7 +19,11 @@ void Buttons::Init()
 	temp = { buttonWidth * 3,0,buttonWidth * 4,30 };
 	mButtonList.insert(make_pair(L"불러오기", temp));
 
+	temp = { buttonWidth * 4,0, buttonWidth * 5 , 30 };
+	mButtonList.insert(make_pair(L"이미지로드", temp));
+
 	showButtons = true;
+
 
 }
 
@@ -29,7 +33,7 @@ void Buttons::Update()
 		if (Input::GetInstance()->GetKeyDown(VK_LBUTTON)) {
 			RECT rc;
 			//POINT cursor = { _mousePosition.x, _mousePosition.y };
-			rc = mButtonList.find(L"지우기")->second;
+			//rc = mButtonList.find(L"지우기")->second;
 			rc = mButtonList.find(L"내보내기")->second;
 			if (PtInRect(&rc, _mousePosition)) {
 
@@ -78,6 +82,14 @@ void Buttons::Update()
 
 				fin.close();
 			}
+			else if (PtInRect(&(rc = mButtonList.find(L"이미지로드")->second), _mousePosition)) {
+
+				if (!IMAGEMANAGER->FindImage(L"Image")) {
+					failLoad = true;
+					return;
+				}
+				else mLoadQ = !mLoadQ;
+			}
 			else {
 				if (mRectList->size()) {
 					if ((*mCurrentRect) == NULL) {
@@ -124,11 +136,13 @@ void Buttons::Update()
 	if (Input::GetInstance()->GetKeyDown(VK_TAB)) {
 
 		showButtons = !showButtons;
+		failLoad = 0;
 	}
 }
 
 void Buttons::Release()
 {
+	
 }
 
 void Buttons::Render(HDC hdc)
@@ -150,6 +164,11 @@ void Buttons::Render(HDC hdc)
 
 		SelectObject(hdc, oldb);
 		DeleteObject(newb);
+
+		if (failLoad) {
+			wstring noImage = L"로드할 이미지가 없습니다";
+			TextOut(hdc, WINSIZEX / 2, WINSIZEY / 2, noImage.c_str(), noImage.size());
+		}
 
 	}
 }

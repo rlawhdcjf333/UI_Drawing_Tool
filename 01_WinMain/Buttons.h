@@ -10,6 +10,8 @@ class Buttons
 	vector<RECT>::iterator* mitr ;
 	RECT** mCurrentRect;
 	bool showButtons;
+	bool failLoad;
+	bool mLoadQ;
 
 public:
 
@@ -20,6 +22,8 @@ public:
 
 	void SetRECTSptr(RECTS* RECTSptr);
 	bool GetShowButtons() { return showButtons; }
+
+	bool GetLoadQ() { return mLoadQ; }
 
 };
 
