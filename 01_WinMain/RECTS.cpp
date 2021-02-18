@@ -14,11 +14,8 @@ void RECTS::Update()
 
 	if (!mButtons->GetShowButtons()) {
 		if (Input::GetInstance()->GetKeyDown(VK_LBUTTON)) {
-
 			startPoint = { mX, mY };
-
 		}
-
 		if (Input::GetInstance()->GetKey(VK_LBUTTON)) {
 
 			endPoint = { mX,mY };
@@ -26,55 +23,12 @@ void RECTS::Update()
 		}
 
 		if (Input::GetInstance()->GetKeyUp(VK_LBUTTON)) {
-<<<<<<< Updated upstream
 
 			mRectList.push_back(rc);
 
 			rc = {};
 		}
 	}
-
-	if (mRectList.size()) {
-		for (int i = mRectList.size() - 1; i >= 0; i--) {
-			RECT* rc = &mRectList[i];
-			if (PtInRect(rc, { (int)mX, (int)mY })) {
-				if (Input::GetInstance()->GetKeyDown(VK_LBUTTON)) {
-					if (mCurrentRect == rc) {
-						mCurrentRect = nullptr;
-					}
-					else mCurrentRect = rc;
-				}
-=======
-			if (rc.right - rc.left > 2 && rc.bottom - rc.top > 2) {
-				mRectList.push_back(rc);
->>>>>>> Stashed changes
-			}
-			rc = {};
-		}
-	}
-<<<<<<< Updated upstream
-
-	//if(mRectList.size())
-	//for (RECT& elem : mRectList) {
-
-	//	if (PtInRect(&elem, { (int)mX, (int)mY }))
-	//	{
-	//		if (Input::GetInstance()->GetKeyDown(VK_LBUTTON)) {
-
-	//			if (mCurrentRect == &elem) {
-
-	//				mCurrentRect = nullptr;
-	//			}
-	//			else mCurrentRect = &elem;
-
-	//		}
-	//	}
-	//
-	//}
-	
-
-=======
->>>>>>> Stashed changes
 }
 
 void RECTS::Release()
