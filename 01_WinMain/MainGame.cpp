@@ -47,8 +47,8 @@ void MainGame::Release()
 
 void MainGame::Update()
 {
-	mRects->Update();
 	mButtons->Update();
+	mRects->Update();
 }
 
 

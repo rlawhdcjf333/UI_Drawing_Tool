@@ -28,10 +28,10 @@ void Buttons::Update()
 	if (showButtons) {
 		if (Input::GetInstance()->GetKeyDown(VK_LBUTTON)) {
 			RECT rc;
-			POINT cursor = { _mousePosition.x, _mousePosition.y };
-
+			//POINT cursor = { _mousePosition.x, _mousePosition.y };
+			rc = mButtonList.find(L"지우기")->second;
 			rc = mButtonList.find(L"내보내기")->second;
-			if (PtInRect(&rc, cursor)) {
+			if (PtInRect(&rc, _mousePosition)) {
 
 				ofstream fout("rectList.txt");
 
@@ -45,15 +45,10 @@ void Buttons::Update()
 
 				fout.close();
 			}
-
-			rc = mButtonList.find(L"지우기")->second;
-			if (PtInRect(&rc, cursor)) { mRects->EraseElem(mRects->GetCurrentRect()); }
-
-			rc = mButtonList.find(L"모두 지우기")->second;
-			if (PtInRect(&rc, cursor)) { mRects->EraseAll(); }
-
-			rc = mButtonList.find(L"불러오기")->second;
-			if (PtInRect(&rc, cursor)) {
+			else if (PtInRect(&(rc = mButtonList.find(L"지우기")->second), _mousePosition)) 
+			{ mRects->EraseElem(); }
+			else if(PtInRect(&(rc = mButtonList.find(L"모두 지우기")->second), _mousePosition)) { mRects->EraseAll(); }
+			else if (PtInRect(&(rc = mButtonList.find(L"불러오기")->second), _mousePosition)) {
 
 				ifstream fin("rectList.txt");
 				if (fin.is_open()) {
@@ -83,7 +78,46 @@ void Buttons::Update()
 
 				fin.close();
 			}
+			else {
+				if (mRectList->size()) {
+					if ((*mCurrentRect) == NULL) {
+						*mitr = mRectList->end() - 1;
+					}
+					else {
+						if (!PtInRect((*mCurrentRect), _mousePosition)) {
+							*mitr = mRectList->end() - 1;
+						}
+					}
+					// itr이 시작 점이 아닐경우
+					if ((*mitr) != mRectList->begin()) {
+						for (; *mitr > mRectList->begin(); --(*mitr)) {
+							RECT* rc = &(**mitr);
+							if (PtInRect(rc, _mousePosition)) {
+								if (*mCurrentRect == rc) {
+									*mCurrentRect = nullptr;
+								}
+								else {
+									*mCurrentRect = rc;
+									break;
+								}
+							}
+						}
+					}
+					// itr이 시작 위치일때
+					if (*mitr == mRectList->begin()) {
+						RECT* rc = &(**mitr);
+						if (PtInRect(rc, _mousePosition)) {
+							if (*mCurrentRect == rc) {
+								*mCurrentRect = nullptr;
+							}
+							else {
+								*mCurrentRect = rc;
+							}
+						}
+					}
 
+				}
+			}
 		}
 	}
 
@@ -119,3 +153,11 @@ void Buttons::Render(HDC hdc)
 
 	}
 }
+
+void Buttons::SetRECTSptr(RECTS* RECTSptr)
+{
+	mRects = RECTSptr;
+	mRectList = mRects->GetRectListPt();
+	mitr = mRects->Getitr();
+	mCurrentRect = mRects->GetCurrentRect();
+	}

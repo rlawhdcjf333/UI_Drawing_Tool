@@ -17,12 +17,11 @@ class RECTS
 	pointF startPoint;
 	pointF endPoint;
 	
-	RECT* mCurrentRect;
+	RECT* mCurrentRect = nullptr;
 
 	RECT rc;
-
 	vector <RECT> mRectList;
-
+	vector<RECT>::iterator mitr;
 public:
 
 	void Init();
@@ -32,10 +31,11 @@ public:
 
 	void SetButtons(Buttons* Buttonsptr) { mButtons = Buttonsptr; }
 	void EraseAll() { mRectList.clear(); mRectList.shrink_to_fit(); }
-	void EraseElem(RECT* Rectptr);
-	RECT* GetCurrentRect() { return mCurrentRect; }
-
+	void EraseElem();
+	RECT** GetCurrentRect() { return &mCurrentRect; }
+	vector<RECT>::iterator* Getitr() { return &mitr; }
 	vector <RECT> GetRectList() { return mRectList; }
+	vector<RECT>* const GetRectListPt() { return &mRectList; }
 	void LoadRectList(RECT rc) { mRectList.push_back(rc); }
 
 };
