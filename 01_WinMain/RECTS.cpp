@@ -34,23 +34,37 @@ void RECTS::Update()
 		}
 	}
 
-	if(mRectList.size())
-	for (RECT& elem : mRectList) {
-
-		if (PtInRect(&elem, { (int)mX, (int)mY }))
-		{
-			if (Input::GetInstance()->GetKeyDown(VK_LBUTTON)) {
-
-				if (mCurrentRect == &elem) {
-
-					mCurrentRect = nullptr;
+	if (mRectList.size()) {
+		for (int i = mRectList.size() - 1; i >= 0; i--) {
+			RECT* rc = &mRectList[i];
+			if (PtInRect(rc, { (int)mX, (int)mY })) {
+				if (Input::GetInstance()->GetKeyDown(VK_LBUTTON)) {
+					if (mCurrentRect == rc) {
+						mCurrentRect = nullptr;
+					}
+					else mCurrentRect = rc;
 				}
-				else mCurrentRect = &elem;
-
 			}
 		}
-	
 	}
+
+	//if(mRectList.size())
+	//for (RECT& elem : mRectList) {
+
+	//	if (PtInRect(&elem, { (int)mX, (int)mY }))
+	//	{
+	//		if (Input::GetInstance()->GetKeyDown(VK_LBUTTON)) {
+
+	//			if (mCurrentRect == &elem) {
+
+	//				mCurrentRect = nullptr;
+	//			}
+	//			else mCurrentRect = &elem;
+
+	//		}
+	//	}
+	//
+	//}
 	
 
 }
