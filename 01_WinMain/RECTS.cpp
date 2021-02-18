@@ -9,7 +9,6 @@ void RECTS::Init()
 
 void RECTS::Update()
 {
-
 	mX = _mousePosition.x;
 	mY = _mousePosition.y;
 
@@ -27,6 +26,7 @@ void RECTS::Update()
 		}
 
 		if (Input::GetInstance()->GetKeyUp(VK_LBUTTON)) {
+<<<<<<< Updated upstream
 
 			mRectList.push_back(rc);
 
@@ -44,9 +44,15 @@ void RECTS::Update()
 					}
 					else mCurrentRect = rc;
 				}
+=======
+			if (rc.right - rc.left > 2 && rc.bottom - rc.top > 2) {
+				mRectList.push_back(rc);
+>>>>>>> Stashed changes
 			}
+			rc = {};
 		}
 	}
+<<<<<<< Updated upstream
 
 	//if(mRectList.size())
 	//for (RECT& elem : mRectList) {
@@ -67,6 +73,8 @@ void RECTS::Update()
 	//}
 	
 
+=======
+>>>>>>> Stashed changes
 }
 
 void RECTS::Release()
@@ -110,31 +118,22 @@ void RECTS::Render(HDC hdc)
 		RenderRect(hdc, RT);
 		RenderRect(hdc, LB);
 		RenderRect(hdc, RB);
-
 	}
 	
 
 }
 
-void RECTS::EraseElem(RECT* Rectptr)
+void RECTS::EraseElem()
 {
-
-	for(int i =0; i < mRectList.size(); i++) {
-
-		if (Rectptr==nullptr) {
-
-			mRectList.pop_back();
-			return;
-		}
-
-		if (&mRectList[i] == Rectptr) {
-
-			mRectList.erase(mRectList.begin() + i);
-			return;
-		}
-
+	if (mRectList.size() == 0) {
+		return;
 	}
-
-	
-
+	if (mCurrentRect == nullptr) {
+		mRectList.pop_back();
+		return;
+	}
+	else {
+		mRectList.erase(mitr);
+		mCurrentRect = nullptr;
+	}
 }
