@@ -1,0 +1,3 @@
+﻿  Buttons.cpp
+C:\Users\김종철\Documents\GitHub\UI_Drawing_Tool\01_WinMain\Buttons.cpp(113,113): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  01_WinMain.vcxproj -> C:\Users\김종철\Documents\GitHub\UI_Drawing_Tool\x64\Debug\01_WinMain.exe
