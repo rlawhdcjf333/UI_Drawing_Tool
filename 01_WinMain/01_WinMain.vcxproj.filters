@@ -43,9 +43,6 @@
     <Filter Include="FrameWork\Camera">
       <UniqueIdentifier>{d52a9290-4164-4636-89a3-4c2bffdd3c23}</UniqueIdentifier>
     </Filter>
-    <Filter Include="FrameWork\SoundManager">
-      <UniqueIdentifier>{e2a38dc5-4980-41b4-b73a-d784af0dc78d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="FrameWork\Time">
       <UniqueIdentifier>{c320e730-2234-46c8-bdc1-828700d121ea}</UniqueIdentifier>
     </Filter>
@@ -111,9 +108,6 @@
     <ClInclude Include="Time.h">
       <Filter>FrameWork\Time</Filter>
     </ClInclude>
-    <ClInclude Include="SoundPlayer.h">
-      <Filter>FrameWork\SoundManager</Filter>
-    </ClInclude>
     <ClInclude Include="ObjectManager.h">
       <Filter>FrameWork\ObjectManager</Filter>
     </ClInclude>
@@ -163,9 +157,6 @@
     </ClCompile>
     <ClCompile Include="Time.cpp">
       <Filter>FrameWork\Time</Filter>
-    </ClCompile>
-    <ClCompile Include="SoundPlayer.cpp">
-      <Filter>FrameWork\SoundManager</Filter>
     </ClCompile>
     <ClCompile Include="ObjectManager.cpp">
       <Filter>FrameWork\ObjectManager</Filter>

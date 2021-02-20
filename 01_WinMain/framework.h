@@ -16,15 +16,6 @@
 
 using namespace std;
 
-//64비트일 경우에는 해당 라이브러리 불러오게
-#ifdef _WIN64
-#pragma comment(lib,"../03_Libraries/lib/fmodex64_vc")
-//이외의 경우에는 32비트 운영체제에 맞는 라이브러리 불러오기
-#else
-#pragma comment(lib,"../03_Libraries/lib/fmodex_vc")
-#endif
-
-#include "../03_Libraries/inc/fmod.hpp"
 
 #include "DefineHeader.h"
 #include "Figure.h"
@@ -34,7 +25,6 @@ using namespace std;
 #include "ImageManager.h"
 #include "CameraManager.h"
 #include "Time.h"
-#include "SoundPlayer.h"
 #include "ObjectManager.h"
 
 extern POINT _mousePosition;	//마우스 좌표
