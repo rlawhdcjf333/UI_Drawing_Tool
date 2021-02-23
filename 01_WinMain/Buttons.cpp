@@ -171,6 +171,19 @@ void Buttons::Render(HDC hdc)
 		}
 
 	}
+	if (Input::GetInstance()->GetKey(VK_TAB))
+	{
+		if (!showButtons)
+		{
+			wstring massegText = L"메뉴를 지웠습니다.";
+			TextOut(hdc, WINSIZEX / 2, WINSIZEY / 2, massegText.c_str(), massegText.size());
+		}
+		else if (showButtons)
+		{
+			wstring massegText = L"메뉴를 표시했습니다.";
+			TextOut(hdc, WINSIZEX / 2, WINSIZEY / 2, massegText.c_str(), massegText.size());
+		}
+	}
 }
 
 void Buttons::SetRECTSptr(RECTS* RECTSptr)
@@ -179,4 +192,4 @@ void Buttons::SetRECTSptr(RECTS* RECTSptr)
 	mRectList = mRects->GetRectListPt();
 	mitr = mRects->Getitr();
 	mCurrentRect = mRects->GetCurrentRect();
-	}
+}

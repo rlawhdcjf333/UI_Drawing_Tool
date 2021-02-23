@@ -9,7 +9,10 @@ class Buttons
 	vector<RECT>* mRectList;
 	vector<RECT>::iterator* mitr ;
 	RECT** mCurrentRect;
+
+	//좌상단 메뉴 버튼 표시 여부
 	bool showButtons;
+	//파일 로드 여부
 	bool failLoad;
 	bool mLoadQ;
 

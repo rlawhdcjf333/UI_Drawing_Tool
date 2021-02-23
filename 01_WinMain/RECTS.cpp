@@ -12,6 +12,7 @@ void RECTS::Update()
 	mX = _mousePosition.x;
 	mY = _mousePosition.y;
 
+	//메뉴 없을 때 사각형 그려주기
 	if (!mButtons->GetShowButtons()) {
 		if (Input::GetInstance()->GetKeyDown(VK_LBUTTON)) {
 			startPoint = { mX, mY };
@@ -35,6 +36,11 @@ void RECTS::Update()
 
 		}
 	}
+
+	//렉트 클리어
+	if (Input::GetInstance()->GetKeyDown(VK_ESCAPE)) {
+		mRectList.clear();
+	}
 }
 
 void RECTS::Release()
@@ -44,9 +50,14 @@ void RECTS::Release()
 void RECTS::Render(HDC hdc)
 {
 	if (mRectList.size()) {
-
+		
+		//글자 출력
+		SetTextColor(hdc, RGB(255, 255, 255));
 		wstring num = L"총 rect 개수 : " + to_wstring(mRectList.size());
 		TextOutW(hdc, 1000, 0, num.c_str(), num.size());
+		wstring massegText = L"ESC Push Clear";
+		TextOutW(hdc, 1000, 20, massegText.c_str(), massegText.size());
+		
 
 		HBRUSH newb = (HBRUSH)GetStockObject(NULL_BRUSH);
 		HBRUSH oldb = (HBRUSH)SelectObject(hdc, newb);
